@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - {{ env('APP_NAME') }}</title>
-    <!-- Adicione links para seus estilos CSS, Bootstrap, etc. -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -69,6 +68,7 @@
 <body>
     <div class="login-container">
         <h1>{{ env('APP_NAME') }}</h1>
+<img src="{{ asset('images/logo.png') }}" alt="{{ env('APP_NAME') }} Logo" style="max-width: 100%; height: auto;"><br><br>
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -87,9 +87,11 @@
             </div>
         </form>
 
-        @if ($errors->has('login'))
+        @if ($errors->any())
             <div class="error-message">
-                {{ $errors->first('login') }}
+                @foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach
             </div>
         @endif
     </div>
